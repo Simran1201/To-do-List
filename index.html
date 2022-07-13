@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>To Do List</title>
+</head>
+<body>
+    <div class="header">
+        <h2>My To Do List</h2>
+        <div class="combo">
+            <input type="text" id="addItem" class="item" placeholder="Enter your List.." >
+        <span onclick="newElement()" class="btn">Add</span>
+        </div>
+    </div>
+    <ul id="list" class="list ">
+    </ul>
+    <script>
+        function newElement(){
+            let input = document.getElementById("addItem").value;
+            let li = document.createElement("li");
+            let txt = document.createTextNode(input);
+            li.appendChild(txt);
+            let mySpan = document.createElement("span");
+            mySpan.innerHTML ="x";
+            mySpan.className += "close";
+            if(input === ""){
+                alert ("Please enter some work.");
+            }
+            else{
+                document.getElementById("list").appendChild(li);
+                li.appendChild(mySpan);
+            }
+            document.getElementById("addItem").value ="";
+            const close = document.getElementsByClassName("close");
+            for(let i=0; i<close.length; i++){
+                close[i].addEventListener("click",()=>{
+                    close[i].parentElement.style.display="none";
+                })
+            }            
+        }
+        let ul = document.getElementById("list");
+        ul.addEventListener("click",(e)=>{
+            if(e.target.tagName === "li" || "LI"){
+                e.target.classList.toggle("checked");
+                console.log("check")
+            }                
+        },false);
+    </script>
+</body>
+</html>
